@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lab 2 | COMP1073 Client-Side JavaScript</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <h1>Airports</h1>
+    <ul id="list">
+      <li>
+        Beijing Capital International, https://goo.gl/maps/iPe5fAqzq8C2 PEK
+      </li>
+      <li>
+        John F Kennedy International, https://goo.gl/maps/JWwABmA3MBS2 JFK
+      </li>
+      <li>
+        Lester B. Pearson International, https://goo.gl/maps/Ypu1dJLsnQu YYZ
+      </li>
+      <li>London Heathrow, https://goo.gl/maps/TFx8SrATdYr LHR</li>
+      <li>Tokyo Haneda International, https://goo.gl/maps/5UxH2TxbRtT2 HND</li>
+    </ul>
+    <section></section>
+  </body>
+  <script>
+    let airportList = document.querySelector("#list");
+    airportList.innerHTML = "";
+    // New section for paragraph below
+    let bodyPg = document.querySelector("section");
+    bodyPg.innerHTML = "";
+    // variables for average
+    let nameTotal = 0;
+    let nameAvg = 0;
+    // create paragraph for average
+    let avgItem = document.createElement("p");
+
+    let airports = [
+      "Beijing Capital International, https://goo.gl/maps/iPe5fAqzq8C2 PEK",
+      "John F Kennedy International, https://goo.gl/maps/JWwABmA3MBS2 JFK",
+      "Lester B. Pearson International, https://goo.gl/maps/Ypu1dJLsnQu YYZ",
+      "London Heathrow, https://goo.gl/maps/TFx8SrATdYr LHR",
+      "Tokyo Haneda International, https://goo.gl/maps/5UxH2TxbRtT2 HND"
+    ];
+
+    for (let i = 0; i < airports.length; i++) {
+      let input = airports[i];
+      let commaIndex = input.indexOf(",");
+
+      let airportName = input.slice(0, commaIndex);
+      let airportCode = input.slice(-3);
+      let airportUrl = input.slice(commaIndex + 1, -4);
+
+      let result = `<a href="${airportUrl}">${airportCode} - ${airportName}</a>`;
+      let listItem = document.createElement("li");
+      listItem.innerHTML = result;
+      airportList.appendChild(listItem);
+      // Average below
+      nameTotal += airportName.length;
+      nameAvg = Math.floor(nameTotal / airports.length);
+      avgItem.innerHTML = `The average number of characters in the names is: ${nameAvg}`;
+      bodyPg.append(avgItem);
+    }
+  </script>
+</html>
